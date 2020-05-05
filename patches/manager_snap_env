@@ -1,0 +1,44 @@
+diff --git a/source/libike/manager.cpp b/source/libike/manager.cpp
+index d1cbaf2..4d0845e 100644
+--- a/source/libike/manager.cpp
++++ b/source/libike/manager.cpp
+@@ -320,7 +320,12 @@ _CONFIG_MANAGER::_CONFIG_MANAGER()
+ 
+ 	BDATA dotike;
+ 
+-	dotike.add( pwd->pw_dir, strlen( pwd->pw_dir ) );
++	const char* snap_env = getenv("SNAP_USER_DATA");
++	if( snap_env ) {
++		dotike.add( snap_env, strlen( snap_env ) );
++	} else {
++		dotike.add( pwd->pw_dir, strlen( pwd->pw_dir ) );
++	}
+ 	dotike.add( path_dotike, strlen( path_dotike ) + 1 );
+ 
+ 	struct stat sb;
+@@ -332,7 +337,11 @@ _CONFIG_MANAGER::_CONFIG_MANAGER()
+ 
+ 	char path_sites[] = "/.ike/sites";
+ 
+-	sites_user.add( pwd->pw_dir, strlen( pwd->pw_dir ) );
++	if( snap_env ) {
++		sites_user.add( snap_env, strlen( snap_env ) );
++	} else {
++		sites_user.add( pwd->pw_dir, strlen( pwd->pw_dir ) );
++	}
+ 	sites_user.add( path_sites, strlen( path_sites ) + 1 );
+ 
+ 	memset( &sb, 0, sizeof( sb ) );
+@@ -343,7 +352,11 @@ _CONFIG_MANAGER::_CONFIG_MANAGER()
+ 
+ 	char path_certs[] = "/.ike/certs";
+ 
+-	certs_user.add( pwd->pw_dir, strlen( pwd->pw_dir ) );
++	if( snap_env ) {
++		certs_user.add( snap_env, strlen( snap_env ) );
++	} else {
++		certs_user.add( pwd->pw_dir, strlen( pwd->pw_dir ) );
++	}
+ 	certs_user.add( path_certs, strlen( path_certs ) + 1 );
+ 
+ 	memset( &sb, 0, sizeof( sb ) );

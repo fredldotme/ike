@@ -1,0 +1,39 @@
+diff --git a/source/iked/conf.token.ll b/source/iked/conf.token.ll
+index 0590e61..fc9edef 100644
+--- a/source/iked/conf.token.ll
++++ b/source/iked/conf.token.ll
+@@ -339,7 +339,12 @@ bool _IKED::conf_load( const char * path, bool trace )
+ 	if( path_log[ 0 ] == 0 )
+ 		snprintf( path_log, MAX_PATH, "%s/iked.log", PATH_DEBUG );
+ 
+-	snprintf( path_dhcp, MAX_PATH, "%s/iked.dhcp", path );
++	const char* snap_env = getenv("SNAP_DATA");
++	if( snap_env ) {
++		snprintf( path_dhcp, MAX_PATH, "%s/iked.dhcp", snap_env );
++	} else {
++		snprintf( path_dhcp, MAX_PATH, "%s/iked.dhcp", path );
++	}
+ 
+ 	//
+ 	// open file and run parser
+diff --git a/source/iked/iked.cpp b/source/iked/iked.cpp
+index 6a0842c..7493f67 100644
+--- a/source/iked/iked.cpp
++++ b/source/iked/iked.cpp
+@@ -210,7 +210,15 @@ long _IKED::init( long setlevel )
+ 	// load our configuration
+ 	//
+ 
+-	if( !conf_load( PATH_CONF ) )
++	char* conf_file = NULL;
++	char* snap_env = getenv("SNAP");
++	if( snap_env ) {
++		conf_file = strcat(snap_env, PATH_CONF);
++	} else {
++		conf_file = PATH_CONF;
++	}
++
++	if( !conf_load( conf_file ) )
+ 		return LIBIKE_FAILED;
+ 
+ 	//

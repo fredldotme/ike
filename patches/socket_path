@@ -1,0 +1,13 @@
+diff --git a/source/libike/libike.h b/source/libike/libike.h
+index 8327813..0521984 100644
+--- a/source/libike/libike.h
++++ b/source/libike/libike.h
+@@ -72,7 +72,7 @@
+ #ifdef WIN32
+ # define IKEI_PIPE_NAME				"\\\\.\\pipe\\ikedi"
+ #else
+-# define IKEI_PIPE_NAME				"/var/run/ikedi"
++# define IKEI_PIPE_NAME				"/var/snap/ike-qt-core18/current/ikedi"
+ #endif
+ 
+ #define IKEI_MSGID_RESULT			1
