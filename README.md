@@ -8,9 +8,9 @@ Website: https://www.shrew.net/home
 
 # Install
 
-`snap install --edge ike-qt`
+`snap install --edge ike-qt-core18`
 
 Before use, start the service
-`sudo snap start ike-qt`
+`sudo snap start ike-qt-core18`
 
 # Still in beta, some features may not work.
