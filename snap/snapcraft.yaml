@@ -102,6 +102,13 @@ parts:
     configflags: [ "-DQTGUI=YES", "-DNATT=YES" ]
     override-pull: |
       snapcraftctl pull
+      dos2unix source/libike/manager.file.cpp
+      dos2unix source/iked/ike.exch.config.cpp
+      dos2unix source/iked/ike.names.cpp
+      dos2unix source/iked/ike.xconf.cpp
+      dos2unix source/libike/libike.h
+      dos2unix source/iked/iked.cpp
+      dos2unix source/libike/manager.cpp
       patch -p1 < $SNAPCRAFT_PROJECT_DIR/patches/fix_readdir
       patch -p1 < $SNAPCRAFT_PROJECT_DIR/patches/paths
       patch -p1 < $SNAPCRAFT_PROJECT_DIR/patches/out-of-tree
