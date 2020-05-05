@@ -1,6 +1,6 @@
 name: ike-qt-core18
 version: '2.2.1'
-summary: The Shewsoft VPN Manager
+summary: The Shewsoft VPN Manager (working version)
 description: |
  The Shrew Soft VPN Client is a free IPsec VPN Client for FreeBSD, NetBSD,
  Linux and Windows operating systems. This product can be used to communicate
